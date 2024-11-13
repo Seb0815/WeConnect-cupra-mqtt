@@ -21,10 +21,13 @@ from PIL import Image
 
 from requests import exceptions
 
-from weconnect import weconnect, addressable, errors, util, domain
-from weconnect.__version import __version__ as __weconnect_version__
+from weconnect_cupra import weconnect_cupra, addressable, errors, util
+from weconnect_cupra.service import Service
+
+from weconnect_cupra.__version import __version__ as __weconnect_version__
 
 from .__version import __version__
+
 
 LOG_LEVELS = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
 DEFAULT_LOG_LEVEL = "ERROR"
@@ -309,11 +312,16 @@ def main():  # noqa: C901  # pylint: disable=too-many-branches,too-many-statemen
     try:
         while True:
             try:
-                weConnect = weconnect.WeConnect(username=username, password=password, spin=spin, updateAfterLogin=False,
+                weConnect = weconnect_cupra.WeConnect(username=username, password=password,
+                                                      service=Service.MY_CUPRA,
+                                                      updateAfterLogin=False,
+                                                      loginOnInit=False,
+                                                      timeout=10,
                                                 updateCapabilities=mqttCLient.updateCapabilities, updatePictures=mqttCLient.updatePictures,
-                                                maxAgePictures=args.pictureCache, selective=mqttCLient.selective,
-                                                forceReloginAfter=21600, timeout=180)
+                                                maxAgePictures=args.pictureCache, selective=mqttCLient.selective)
+                weConnect.login()
                 mqttCLient.connectWeConnect(weConnect)
+                weConnect.update()
                 break
             except exceptions.ConnectionError as e:
                 LOG.error('Could not connect to VW-Server: %s, will retry in 10 seconds', e)
