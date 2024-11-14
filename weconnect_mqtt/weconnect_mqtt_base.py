@@ -335,7 +335,6 @@ def main():  # noqa: C901  # pylint: disable=too-many-branches,too-many-statemen
                 sys.exit(1)
             mqttCLient.weConnect.latitude = latitude
             mqttCLient.weConnect.longitude = longitude
-        mqttCLient.weConnect.searchRadius = args.chargingLocationRadius
 
         while True:
             try:
