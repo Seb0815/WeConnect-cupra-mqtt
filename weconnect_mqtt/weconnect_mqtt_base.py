@@ -117,8 +117,6 @@ def main():  # noqa: C901  # pylint: disable=too-many-branches,too-many-statemen
     weConnectGroup.add_argument('--chargingLocationRadius', type=NumberRangeArgument(0, 100000),
                                 help='Radius in meters around the chargingLocation to search for chargers')
     weConnectGroup.add_argument('--no-capabilities', dest='noCapabilities', help='Do not add capabilities', action='store_true')
-    weConnectGroup.add_argument('--selective', help='Just fetch status of a certain type', default=None, required=False, action='append',
-                                type=domain.Domain, choices=list(domain.Domain))
     weConnectGroup.add_argument('--convert-times', dest='convertTimes',
                                 help='Convert all times from UTC to timezone, e.g. --convert-times \'Europe/Berlin\', leave empty to use system timezone',
                                 nargs='?', const='', default=None, type=str)
