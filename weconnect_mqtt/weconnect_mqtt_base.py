@@ -275,7 +275,7 @@ def main():  # noqa: C901  # pylint: disable=too-many-branches,too-many-statemen
 
     mqttCLient = WeConnectMQTTClient(clientId=args.mqttclientid, protocol=mqttVersion, transport=args.transport, interval=args.interval,
                                      prefix=args.prefix, ignore=args.ignore, updateCapabilities=(not args.noCapabilities),
-                                     updatePictures=args.pictures, selective=args.selective, listNewTopics=args.listTopics,
+                                     updatePictures=args.pictures, selective=False, listNewTopics=args.listTopics,
                                      republishOnUpdate=args.republishOnUpdate, pictureFormat=args.pictureFormat, topicFilterRegex=topicFilterRegex,
                                      convertTimezone=convertTimezone, timeFormat=args.timeFormat, withRawJsonTopic=args.withRawJsonTopic,
                                      updateOnConnect=args.updateOnConnect)
